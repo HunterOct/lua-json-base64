@@ -2,7 +2,8 @@
 Lua json_encode,json_decode,base64_encode,base64_decode
 
 
-How to use
+
+# How to use
 
 Example:
 
@@ -24,7 +25,7 @@ print(json_decode(dvt))
 
 Results:
 
-{--table ...
+{
 k = "v",
 ar = {
 k = "v"
