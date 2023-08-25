@@ -72,7 +72,7 @@ function json.encode(obj, as_key)
     s[#s + 1] = '['
     for i, val in ipairs(obj) do
       if i > 1 then s[#s + 1] = ', ' end
-      s[#s + 1] = json.stringify(val)
+      s[#s + 1] = json.encode(val)
     end
     s[#s + 1] = ']'
   elseif kind == 'table' then
@@ -80,9 +80,9 @@ function json.encode(obj, as_key)
     s[#s + 1] = '{'
     for k, v in pairs(obj) do
       if #s > 1 then s[#s + 1] = ', ' end
-      s[#s + 1] = json.stringify(k, true)
+      s[#s + 1] = json.encode(k, true)
       s[#s + 1] = ':'
-      s[#s + 1] = json.stringify(v)
+      s[#s + 1] = json.encode(v)
     end
     s[#s + 1] = '}'
   elseif kind == 'string' then
@@ -111,18 +111,18 @@ function json.decode(str, pos, end_delim)
     local obj, key, delim_found = {}, true, true
     pos = pos + 1
     while true do
-      key, pos = json.parse(str, pos, '}')
+      key, pos = json.decode(str, pos, '}')
       if key == nil then return obj, pos end
       if not delim_found then error('Comma missing between object items.') end
       pos = skip_delim(str, pos, ':', true)  -- true -> error if missing.
-      obj[key], pos = json.parse(str, pos)
+      obj[key], pos = json.decode(str, pos)
       pos, delim_found = skip_delim(str, pos, ',')
     end
   elseif first == '[' then  -- Parse an array.
     local arr, val, delim_found = {}, true, true
     pos = pos + 1
     while true do
-      val, pos = json.parse(str, pos, ']')
+      val, pos = json.decode(str, pos, ']')
       if val == nil then return arr, pos end
       if not delim_found then error('Comma missing between array items.') end
       arr[#arr + 1] = val
