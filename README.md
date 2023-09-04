@@ -5,29 +5,25 @@ Lua json_encode,json_decode,base64_encode,base64_decode
 
 # How to use
 
-Example:
+local DVTHAX;
+--GameGuardian gửi yêu cầu truy cập
+local API = gg.makeRequest("https://raw.githubusercontent.com/dvtruong1001/lua-json-base64/main/json-base64.lua").content
 
-array = {}
+--Kiểm tra nếu bạn đã cấp quyền truy cập. nếu đúng thì nó sẽ tiến hành tải mã bên trong link truy cập và chạy nó
+if API then
+  DVTHAX = load(API)();
+ else
+  --Nếu không thì thông báo lỗi và thoát
+  gg["alert"]("Lỗi Bạn chưa cấp quyền truy cập internet!")
+  os.exit()
+end
 
-array["k"] = "v"
-array["ar"] = {}
-array["ar"]["k"] = "v"
+local t = {};
 
-dvt = json_encode(array)
+t["abc"] = "xyz";
+t["VietNam"] = "Number One";
 
-print(dvt)
-
-Results: {"k":"v","ar":{"k":"v"})
+print(DVTHAX["base64"]["decode"](DVTHAX["base64"]["encode"]("abc")));
 
 
-print(json_decode(dvt))
-
-
-Results:
-
-{
-k = "v",
-ar = {
-k = "v"
-}
-}
+print(DVTHAX["json"]["decode"](DVTHAX["json"]["encode"](t)));
