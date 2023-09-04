@@ -6,16 +6,24 @@ Lua json_encode,json_decode,base64_encode,base64_decode
 # How to use
 
 local DVTHAX;
+
 --GameGuardian gửi yêu cầu truy cập
+
 local API = gg.makeRequest("https://raw.githubusercontent.com/dvtruong1001/lua-json-base64/main/json-base64.lua").content
 
 --Kiểm tra nếu bạn đã cấp quyền truy cập. nếu đúng thì nó sẽ tiến hành tải mã bên trong link truy cập và chạy nó
+
 if API then
-  DVTHAX = load(API)();
+
+    DVTHAX = load(API)();
+  
  else
+
   --Nếu không thì thông báo lỗi và thoát
   gg["alert"]("Lỗi Bạn chưa cấp quyền truy cập internet!")
+  
   os.exit()
+  
 end
 
 local t = {};
