@@ -9,7 +9,7 @@ Lua library for use base64 and json
     
     --GameGuardian gửi yêu cầu truy cập
     
-    local API = gg.makeRequest("https://raw.githubusercontent.com/dvtruong1001/lua-json-base64/main/json-base64.lua").content
+    local API = gg.makeRequest("https://raw.githubusercontent.com/HunterOct/lua-json-base64/main/json-base64.lua").content
     
     --Kiểm tra nếu bạn đã cấp quyền truy cập. nếu đúng thì nó sẽ tiến hành tải mã bên trong link truy cập và chạy nó
     
